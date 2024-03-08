@@ -1,0 +1,15 @@
+asdf:
+  datasource:
+    username: root
+    password: recrime
+    jdbc-url: jdbc:mariadb://127.0.0.1:3306/easy_vote
+    driverClassName: org.mariadb.jdbc.Driver
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        hbm2ddl.auto: update
+        open-in-view: false
+        show-sql: true
