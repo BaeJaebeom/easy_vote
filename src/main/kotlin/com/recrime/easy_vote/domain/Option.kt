@@ -8,16 +8,19 @@ import jakarta.persistence.*
 class Option {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "option_index")
-    var optionIndex: Long? = null
+    @Column(name = "option_index", insertable = false, updatable = false)
+    val optionIndex: Long? = null
 
-    @ManyToOne
-    @JoinColumn(name = "vote_index", nullable = false)
-    lateinit var vote: Vote
+    @Column(name = "vote_index", nullable = false)
+    var voteIndex: Long = 0
 
     @Column(name = "name", nullable = false, length = 30)
     lateinit var name: String
 
     @Column(name = "create_time", nullable = false)
     var createTime: LocalDateTime = LocalDateTime.now()
+
+    @OneToMany
+    @JoinColumn(name = "answer_index", nullable = false)
+    lateinit var answer: MutableList<Answer>
 }

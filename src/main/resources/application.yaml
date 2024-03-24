@@ -1,4 +1,9 @@
-asdf:
+server:
+  servlet:
+    encoding:
+      force-response: true
+
+database:
   datasource:
     username: root
     password: recrime

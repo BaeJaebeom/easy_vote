@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class EasyVoteApplicationTests
+class EasyVoteApplication
 
 fun main(args: Array<String>) {
-	runApplication<EasyVoteApplicationTests>(*args)
+	runApplication<EasyVoteApplication>(*args)
 }

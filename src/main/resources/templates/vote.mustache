@@ -1,0 +1,111 @@
+{{>layout/header}}
+<div class="container vote-screen">
+    <div class="vote-info">
+        <h2 class="vote-title">투표 제목</h2>
+        <p class="vote-description">여기에 투표 설명이 들어갑니다. 이 투표는 ~에 관한 것입니다.</p>
+    </div>
+
+    <div class="answers-wrapper" id="answers-wrapper">
+        <div class="answer">
+            <div class="answer-info">
+                <span class="answer-text">답변 예시 1</span>
+                <span class="vote-count">10</span>
+                <span class="view-voters-btn">▼</span>
+            </div>
+            <div class="voters-list" style="display: none">
+                <div>사람 A</div>
+                <div>사람 B</div>
+                <div>사람 A</div>
+                <div>사람 B</div>
+                <div>사람 A</div>
+                <div>사람 B</div>
+                <div>사람 A</div>
+                <div>사람 B</div>
+            </div>
+        </div>
+        <div class="answer">
+            <div class="answer-info">
+                <span class="answer-text">답변 예시 1</span>
+                <span class="vote-count">10</span>
+                <span class="view-voters-btn">▼</span>
+            </div>
+            <div class="voters-list" style="display: none">
+                <div>사람 A</div>
+                <div>사람 B</div>
+            </div>
+        </div>
+    </div>
+
+    <input type="text" class="voter-name-input" placeholder="이름을 입력하세요">
+    <button class="vote-answer-btn">투표하기</button>
+
+    <div class="answers-container">
+        <div class="answer-input-container">
+            <input type="text" id="answer-input" class="add-answer-input" placeholder="답변 추가">
+            <button id="add-answer-btn" class="add-vote-answer-btn">+</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    documentReady(function () {
+
+    })
+
+    const answersWrapper = document.querySelector('#answers-wrapper');
+    answersWrapper.addEventListener('click', function (e) {
+        asdf1(e);
+    });
+
+    function asdf1(e) {
+        // 클릭된 요소가 answer 요소인지 확인
+        const clickedAnswer = e.target.closest('.answer');
+
+        if (e.target.className === "view-voters-btn") return;
+        if (!clickedAnswer) return; // answer 요소 외의 영역을 클릭했다면 무시
+
+        // 이미 선택된 answer 가 있다면 선택 해제
+        const currentSelected = answersWrapper.querySelector('.answer.selected');
+        if (currentSelected) {
+            currentSelected.classList.remove('selected');
+        }
+        // 클릭된 answer 를 선택 상태로 만듦
+        clickedAnswer.classList.add('selected');
+    }
+
+    const addAnswerBtn = document.querySelector('#add-answer-btn');
+    addAnswerBtn.addEventListener('click', function () {
+        const newAnswerDiv = document.createElement('div');
+        newAnswerDiv.classList.add('answer');
+        newAnswerDiv.innerHTML = `
+            <div class="answer-info">
+                <span class="answer-text">답변 예시 1</span>
+            </div>
+    `;
+
+        newAnswerDiv.addEventListener('click', function (e) {
+            asdf1(e);
+        });
+
+        answersWrapper.appendChild(newAnswerDiv);
+    });
+
+
+    const viewVotersButton = document.querySelectorAll('.view-voters-btn');
+    [].forEach.call(viewVotersButton, function(e) {
+        e.addEventListener("click", function (e) {
+            const button = e.target;
+            const answerDiv = button.closest('.answer');
+            const votersList = answerDiv.querySelector('.voters-list');
+            if (votersList.style.display === "none") {
+                votersList.style.display = "block";
+                button.innerHTML = "▲";
+            } else {
+                votersList.style.display = "none";
+                button.innerHTML = "▼";
+            }
+        });
+    });
+
+</script>
+{{>layout/footer}}

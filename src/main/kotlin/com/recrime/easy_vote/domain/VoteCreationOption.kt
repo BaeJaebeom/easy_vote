@@ -4,16 +4,15 @@ import java.time.LocalDateTime
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "vote_select_option")
-class VoteSelectOption {
+@Table(name = "vote_creation_option")
+class VoteCreationOption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vote_select_option_index")
-    var voteSelectOptionIndex: Long? = null
+    @Column(name = "vote_creation_option_index", insertable = false, updatable = false)
+    val voteCreationOptionIndex: Long? = null
 
-    @ManyToOne
-    @JoinColumn(name = "vote_index", nullable = false)
-    lateinit var vote: Vote
+    @Column(name = "vote_index", nullable = false)
+    var voteIndex: Long = 0
 
     @Column(name = "use_period", columnDefinition = "ENUM('Y', 'N')")
     var usePeriod: String = "N"

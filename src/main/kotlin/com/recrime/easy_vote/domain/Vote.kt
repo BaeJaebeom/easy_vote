@@ -8,8 +8,8 @@ import jakarta.persistence.*
 class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vote_index")
-    var voteIndex: Long? = null
+    @Column(name = "vote_index", insertable = false, updatable = false)
+    val voteIndex: Long? = null
 
     @Column(name = "code", nullable = false, length = 10)
     lateinit var code: String
@@ -25,5 +25,9 @@ class Vote {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vote_index")
-    lateinit var voteSelectOption: VoteSelectOption
+    lateinit var voteCreationOption: VoteCreationOption
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vote_index")
+    lateinit var option: MutableList<Option>
 }

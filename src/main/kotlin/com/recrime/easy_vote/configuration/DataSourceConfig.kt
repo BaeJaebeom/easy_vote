@@ -32,7 +32,7 @@ class DataSourceConfig (
 
     @Primary
     @Bean(name = ["dataSource"])
-    @ConfigurationProperties(prefix = "asdf.datasource")
+    @ConfigurationProperties(prefix = "database.datasource")
     fun dataSource(): DataSource {
         return DataSourceBuilder.create().build()
     }
